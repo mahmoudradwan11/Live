@@ -3,6 +3,7 @@ import 'package:live/core/constants/constants.dart';
 import 'package:live/core/controller/states.dart';
 import 'package:live/core/network/dio_helper.dart';
 import 'package:live/models/business_model.dart';
+import 'package:live/models/general_model.dart';
 import 'package:live/models/sports_model.dart';
 
 class NewsCubit extends Cubit<NewsStates> {
@@ -11,19 +12,19 @@ class NewsCubit extends Cubit<NewsStates> {
   static NewsCubit get(context) => BlocProvider.of(context);
   SportsModel? sportsModel;
   BusinessModel? businessModel;
+  GeneralModel? generalModel;
   String selectedCountry = 'eg';
 
-  void changeCountry(country)
-  {
+  void changeCountry(country) {
      selectedCountry = country;
      emit(ChangeCountry());
   }
   void getSports() {
     DioHelper.getData(
-        url: AppConstant.egyptSportNews,
+        url: AppConstant.egyptNews,
         query:
         {
-          'country': country,
+          'country': AppConstant.country,
           'category': AppConstant.cateSports,
           'apiKey': AppConstant.apiKey,
         }
@@ -38,12 +39,31 @@ class NewsCubit extends Cubit<NewsStates> {
       emit(ErrorSportsData());
     });
   }
-  void getBusiness() {
+  void getGeneral(){
     DioHelper.getData(
-        url: AppConstant.egyptSportNews,
+        url: AppConstant.egyptNews,
         query:
         {
-          'country': country,
+          'country': AppConstant.country,
+          'apiKey': AppConstant.apiKey,
+        }
+    ).
+    then((value) {
+      generalModel = GeneralModel.fromJson(value.data);
+      print('Source = ${generalModel!.articles[0].source!.name!}');
+      print('Title = ${generalModel!.articles[0].title}');
+      emit(GetGeneralData());
+    }).catchError((error) {
+      print(error.toString());
+      emit(ErrorGeneralData());
+    });
+  }
+  void getBusiness() {
+    DioHelper.getData(
+        url: AppConstant.egyptNews,
+        query:
+        {
+          'country': AppConstant.country,
           'category': AppConstant.cateBusiness,
           'apiKey': AppConstant.apiKey,
         }

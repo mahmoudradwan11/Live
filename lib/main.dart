@@ -7,11 +7,17 @@ import 'package:live/core/controller/states.dart';
 import 'package:live/core/network/dio_helper.dart';
 import 'package:live/core/network/local.dart';
 import 'package:live/modules/screens/splash_screen.dart';
+import 'core/bloc_observe.dart';
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
-  country = CacheHelper.getData(key: 'Country');
+  Bloc.observer = MyBlocObserver();
+  if(country != null){
+    country = CacheHelper.getData(key: 'Country');
+  }else{
+    country = 'eg';
+  }
   print('Country  = $country');
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -26,16 +32,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-      NewsCubit()..getSports()..getBusiness(),
+      NewsCubit()..getSports()..getBusiness()..getGeneral(),
       child: BlocConsumer<NewsCubit, NewsStates>(
           listener: (context, state) {},
           builder: (context, state) {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Live',
-              theme: ThemeData(
-                primarySwatch: Colors.grey,
-              ),
+              theme: lightTheme,
               home: const SplashScreen(),
             );
           }

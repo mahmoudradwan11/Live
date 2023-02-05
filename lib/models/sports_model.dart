@@ -1,7 +1,7 @@
 class SportsModel {
   String? status;
   int? totalResults;
-  List<ArticlesModel> articles = [];
+  List<ArticlesSportsModel> articles = [];
 
   SportsModel({required this.status, required this.totalResults, required this.articles});
 
@@ -9,14 +9,14 @@ class SportsModel {
     status = json['status'];
     totalResults = json['totalResults'];
     if (json['articles'] != null) {
-      articles = <ArticlesModel>[];
+      articles = <ArticlesSportsModel>[];
       json['articles'].forEach((v) {
-        articles.add(ArticlesModel.fromJson(v));
+        articles.add(ArticlesSportsModel.fromJson(v));
       });
     }
   }
 }
-class ArticlesModel{
+class ArticlesSportsModel{
   Source? source;
   String? author;
   String? title;
@@ -26,7 +26,7 @@ class ArticlesModel{
   String? publishedAt;
   String? content;
 
-  ArticlesModel(
+  ArticlesSportsModel(
       {required this.source,
         required this.author,
         required this.title,
@@ -36,7 +36,7 @@ class ArticlesModel{
         required this.publishedAt,
         required this.content});
 
-  ArticlesModel.fromJson(Map<String, dynamic> json) {
+  ArticlesSportsModel.fromJson(Map<String, dynamic> json) {
     source = json['source'] != null ?Source.fromJson(json['source']) : null;
     author = json['author'];
     title = json['title'];

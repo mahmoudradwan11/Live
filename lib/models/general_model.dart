@@ -1,22 +1,22 @@
-class BusinessModel {
+class GeneralModel {
   String? status;
   int? totalResults;
-  List<ArticlesBusinessModel> articles = [];
+  List<ArticlesGeneralModel> articles = [];
 
-  BusinessModel({required this.status, required this.totalResults, required this.articles});
+  GeneralModel({required this.status, required this.totalResults, required this.articles});
 
-  BusinessModel.fromJson(Map<String, dynamic> json) {
+  GeneralModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
     totalResults = json['totalResults'];
     if (json['articles'] != null) {
-      articles = <ArticlesBusinessModel>[];
+      articles = <ArticlesGeneralModel>[];
       json['articles'].forEach((v) {
-        articles.add(ArticlesBusinessModel.fromJson(v));
+        articles.add(ArticlesGeneralModel.fromJson(v));
       });
     }
   }
 }
-class ArticlesBusinessModel{
+class ArticlesGeneralModel{
   Source? source;
   String? author;
   String? title;
@@ -26,7 +26,7 @@ class ArticlesBusinessModel{
   String? publishedAt;
   String? content;
 
-  ArticlesBusinessModel(
+  ArticlesGeneralModel(
       {required this.source,
         required this.author,
         required this.title,
@@ -36,7 +36,7 @@ class ArticlesBusinessModel{
         required this.publishedAt,
         required this.content});
 
-  ArticlesBusinessModel.fromJson(Map<String, dynamic> json) {
+  ArticlesGeneralModel.fromJson(Map<String, dynamic> json) {
     source = json['source'] != null ?Source.fromJson(json['source']) : null;
     author = json['author'];
     title = json['title'];
