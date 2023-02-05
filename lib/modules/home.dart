@@ -6,6 +6,7 @@ import 'package:live/core/controller/cubit.dart';
 import 'package:live/core/controller/states.dart';
 import 'package:live/core/network/local.dart';
 import 'package:live/models/sports_model.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -20,14 +21,16 @@ class Home extends StatelessWidget {
               appBar: AppBar(
                 title: const Text('News'),
               ),
-              body: const Center(
-                child: Text('Please Check Network'),
+              body: Center(
+                child: LoadingAnimationWidget.inkDrop(
+                  size: 30,
+                  color: Colors.deepOrange,
+                ),
               ),
             );
           }
           return Scaffold(
             appBar: AppBar(
-              backgroundColor: Colors.orangeAccent,
               title: const Text('News'),
               actions: [
                 Padding(
@@ -64,7 +67,7 @@ class Home extends StatelessWidget {
                     child: Row(
                       children: [
                         Image(image:NetworkImage(cubit.sportsModel!.articles[1].urlToImage!)),
-                        const SizedBox(width: 10,),
+                        const Spacer(),
                         Image(image:NetworkImage(cubit.sportsModel!.articles[0].urlToImage!))
                       ],
                     ),
