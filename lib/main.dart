@@ -13,11 +13,7 @@ void main()async{
   DioHelper.init();
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
-  if(country != null){
-    country = CacheHelper.getData(key: 'Country');
-  }else{
-    country = 'eg';
-  }
+  country = CacheHelper.getData(key: 'Country');
   print('Country  = $country');
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
@@ -32,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-      NewsCubit()..getSports()..getBusiness()..getGeneral(),
+      NewsCubit()..getSports()..getBusiness()..getGeneral()..getScience(),
       child: BlocConsumer<NewsCubit, NewsStates>(
           listener: (context, state) {},
           builder: (context, state) {

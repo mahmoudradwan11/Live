@@ -17,12 +17,13 @@ class  ScienceNews extends StatelessWidget {
           var cubit = NewsCubit.get(context);
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
                 title: const Text('Science News')
             ),
             body: ListView.separated(
-              itemBuilder:(context,index)=>buildCustomNews(cubit.businessModel!.articles[index]),
+              itemBuilder:(context,index)=>buildCustomNews(cubit.scienceModel!.articles[index]),
               separatorBuilder:(context,index)=>const BuildDivider(),
-              itemCount:cubit.businessModel!.articles.length,
+              itemCount:cubit.scienceModel!.articles.length,
             ),
           );
         });

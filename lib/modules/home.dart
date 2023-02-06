@@ -131,12 +131,15 @@ class Home extends StatelessWidget {
                         ),
                       ),
                     ),
-                    ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder:(context,index)=>buildCustomNews(cubit.generalModel!.articles[index]),
-                        separatorBuilder:(context,index)=>const BuildDivider(),
-                        itemCount:cubit.generalModel!.articles.length,
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: ListView.separated(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder:(context,index)=>buildCustomNews(cubit.generalModel!.articles[index]),
+                          separatorBuilder:(context,index)=>const BuildDivider(),
+                          itemCount:cubit.generalModel!.articles.length,
+                      ),
                     ),
                   ],
                 ),

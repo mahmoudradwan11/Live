@@ -5,6 +5,7 @@ import 'package:live/core/controller/states.dart';
 import 'package:live/core/network/dio_helper.dart';
 import 'package:live/models/business_model.dart';
 import 'package:live/models/general_model.dart';
+import 'package:live/models/science_model.dart';
 import 'package:live/models/sports_model.dart';
 
 class NewsCubit extends Cubit<NewsStates> {
@@ -14,6 +15,7 @@ class NewsCubit extends Cubit<NewsStates> {
   SportsModel? sportsModel;
   BusinessModel? businessModel;
   GeneralModel? generalModel;
+  ScienceModel? scienceModel;
   String selectedCountry = 'eg';
   void changeCountry(country) {
      selectedCountry = country;
@@ -37,6 +39,26 @@ class NewsCubit extends Cubit<NewsStates> {
     }).catchError((error) {
       print(error.toString());
       emit(ErrorSportsData());
+    });
+  }
+  void getScience() {
+    DioHelper.getData(
+        url: AppConstant.egyptNews,
+        query:
+        {
+          'country': AppConstant.country,
+          'category': AppConstant.cateScience,
+          'apiKey': AppConstant.apiKey,
+        }
+    ).
+    then((value) {
+      scienceModel = ScienceModel.fromJson(value.data);
+      print('Source = ${scienceModel!.articles[0].source!.name!}');
+      print('Title = ${scienceModel!.articles[0].title}');
+      emit(GetScienceData());
+    }).catchError((error) {
+      print(error.toString());
+      emit(ErrorScienceData());
     });
   }
   void getGeneral(){

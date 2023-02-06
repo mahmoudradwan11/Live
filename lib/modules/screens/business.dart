@@ -16,6 +16,7 @@ class BusinessNews extends StatelessWidget {
           var cubit= NewsCubit.get(context);
           return Scaffold(
             appBar: AppBar(
+              centerTitle: true,
                 title: const Text('Business News')),
             body: ListView.separated(
               itemBuilder:(context,index)=>buildCustomNews(cubit.businessModel!.articles[index]),

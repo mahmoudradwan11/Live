@@ -15,7 +15,9 @@ class SportsNews extends StatelessWidget {
         builder: (context, state) {
           var cubit = NewsCubit.get(context);
           return Scaffold(
-            appBar: AppBar(title: const Text('Sports News')),
+            appBar: AppBar(
+              centerTitle: true,
+                title: const Text('Sports News')),
             body: ListView.separated(
               itemBuilder:(context,index)=>buildCustomNews(cubit.sportsModel!.articles[index]),
               separatorBuilder:(context,index)=>const BuildDivider(),
