@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live/core/constants/constants.dart';
 import 'package:live/core/controller/states.dart';
@@ -14,7 +15,6 @@ class NewsCubit extends Cubit<NewsStates> {
   BusinessModel? businessModel;
   GeneralModel? generalModel;
   String selectedCountry = 'eg';
-
   void changeCountry(country) {
      selectedCountry = country;
      emit(ChangeCountry());

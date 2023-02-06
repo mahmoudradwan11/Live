@@ -14,7 +14,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   Timer? _timer;
   _startDelay(){
-    _timer = Timer(const Duration(seconds: 4),_goNext);
+    _timer = Timer(const Duration(seconds:4),_goNext);
   }
   void _goNext(){
     navigateAndReplace(context,const Home());

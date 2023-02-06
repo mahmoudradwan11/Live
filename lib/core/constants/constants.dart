@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-
 class AppConstant {
   static const String baseUrl = 'https://newsapi.org/';
   static const String egyptNews = 'v2/top-headlines';
   static const String apiKey = '6c13d55401484eb49c81a4bca91ed2e5';
-  static const String country = 'eg';
+  static const String country = 'us';
   static const String cateSports = 'sports';
   static const String cateBusiness = 'business';
 }
@@ -15,10 +13,6 @@ ThemeData lightTheme = ThemeData(
   primarySwatch: defaultColor,
   appBarTheme: const AppBarTheme(
     titleSpacing: 20.0,
-    systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: Colors.white,
-      statusBarIconBrightness: Brightness.dark,
-    ),
     backgroundColor: Colors.white,
     elevation: 0.0,
     titleTextStyle: TextStyle(
