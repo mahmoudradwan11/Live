@@ -28,7 +28,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-      NewsCubit()..getSports()..getBusiness()..getGeneral()..getScience(),
+      NewsCubit()..getSports()..getBusiness()..getGeneral()..getScience()..searchNews(),
       child: BlocConsumer<NewsCubit, NewsStates>(
           listener: (context, state) {},
           builder: (context, state) {

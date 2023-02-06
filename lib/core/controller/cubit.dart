@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live/core/constants/constants.dart';
 import 'package:live/core/controller/states.dart';
@@ -6,16 +5,17 @@ import 'package:live/core/network/dio_helper.dart';
 import 'package:live/models/business_model.dart';
 import 'package:live/models/general_model.dart';
 import 'package:live/models/science_model.dart';
+import 'package:live/models/search_model.dart';
 import 'package:live/models/sports_model.dart';
 
 class NewsCubit extends Cubit<NewsStates> {
   NewsCubit() :super(NewsInitState());
-
   static NewsCubit get(context) => BlocProvider.of(context);
   SportsModel? sportsModel;
   BusinessModel? businessModel;
   GeneralModel? generalModel;
   ScienceModel? scienceModel;
+  SearchModel? searchModel;
   String selectedCountry = 'eg';
   void changeCountry(country) {
      selectedCountry = country;
@@ -98,6 +98,22 @@ class NewsCubit extends Cubit<NewsStates> {
     }).catchError((error) {
       print(error.toString());
       emit(ErrorBusinessData());
+    });
+  }
+  void searchNews({String searchWord = 'Tesla'}) {
+    DioHelper.getData(
+        url:AppConstant.egyptSearch,
+        query:{
+          'q':searchWord,
+          'apiKey':AppConstant.apiKey
+        }
+    ).then((value){
+      searchModel = SearchModel.fromJson(value.data);
+      print('Search = ${searchModel!.articles[0].title}');
+      emit(SearchData());
+    }).catchError((error){
+      print(error.toString());
+      emit(ErrorSearch());
     });
   }
 }

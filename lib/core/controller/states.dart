@@ -10,4 +10,6 @@ class ErrorScienceData extends NewsStates{}
 class GetGeneralDataLoad extends NewsStates{}
 class GetGeneralData extends NewsStates{}
 class ErrorGeneralData extends NewsStates{}
+class SearchData extends NewsStates{}
+class ErrorSearch extends NewsStates{}
 class ChangeCountry extends NewsStates{}
