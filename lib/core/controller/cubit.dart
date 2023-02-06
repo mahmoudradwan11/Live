@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live/core/constants/constants.dart';
 import 'package:live/core/controller/states.dart';
@@ -5,8 +6,13 @@ import 'package:live/core/network/dio_helper.dart';
 import 'package:live/models/business_model.dart';
 import 'package:live/models/general_model.dart';
 import 'package:live/models/science_model.dart';
+import 'package:live/models/screen_model.dart';
 import 'package:live/models/search_model.dart';
 import 'package:live/models/sports_model.dart';
+import 'package:live/modules/home.dart';
+import 'package:live/modules/screens/business.dart';
+import 'package:live/modules/screens/science.dart';
+import 'package:live/modules/screens/sports.dart';
 
 class NewsCubit extends Cubit<NewsStates> {
   NewsCubit() :super(NewsInitState());
@@ -21,6 +27,13 @@ class NewsCubit extends Cubit<NewsStates> {
      selectedCountry = country;
      emit(ChangeCountry());
   }
+  List<AppImages>imagesScreen=[
+    AppImages('images/general.jpg',const Home()),
+    AppImages('images/business.png',const BusinessNews()),
+    AppImages('images/sports.png',const SportsNews()),
+    AppImages('images/science.png',const ScienceNews()),
+
+  ];
   void getSports() {
     DioHelper.getData(
         url: AppConstant.egyptNews,

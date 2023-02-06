@@ -2,12 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live/core/controller/cubit.dart';
 import 'package:live/core/controller/states.dart';
-import 'package:live/modules/screens/business.dart';
-import 'package:live/modules/screens/science.dart';
-import 'package:live/modules/screens/sports.dart';
 import 'package:live/modules/widgets/builder/costom_news.dart';
+import 'package:live/modules/widgets/builder/custom_images.dart';
 import 'package:live/modules/widgets/builder/divider.dart';
-import 'package:live/modules/widgets/functions/navigate.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -46,88 +43,16 @@ class Home extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Container(
-                        height: 120,
-                        width: double.infinity,
-                        child: Row(
-                          children:[
-                            Expanded(
-                              child: InkWell(
-                                child: Container(
-                                height: 120,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(0),
-                                  image:const DecorationImage(
-                                    image:AssetImage('images/general.jpg'),
-                                    fit: BoxFit.contain,
-                                  ),
-                                ),
-                                ),
-                                onTap:(){
-                                  navigateAndReplace(context,const Home());
-                                },
-                              ),
+                        height: 80,
+                        child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                           // physics: NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            itemBuilder:(context,index)=>buildImage(cubit.imagesScreen[index],context),
+                            separatorBuilder:(context,index)=>const SizedBox(
+                              width: 10,
                             ),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Expanded(
-                              child: InkWell(
-                                child: Container(
-                                  height: 120,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(0),
-                                    image:const DecorationImage(
-                                      image:AssetImage('images/business.png'),
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                                onTap:(){
-                                  navigateTo(context,const BusinessNews());
-                                },
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ), 
-                            Expanded(
-                              child: InkWell(
-                                child: Container(
-                                  height: 120,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(0),
-                                    image:const DecorationImage(
-                                      image:AssetImage('images/sports.png'),
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                ),
-                                onTap:(){
-                                  navigateTo(context,const SportsNews());
-                                },
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 5,
-                            ), 
-                            Expanded(
-                              child: InkWell(
-                                child: Container(
-                                  height: 120,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(0),
-                                    image:const DecorationImage(
-                                      image:AssetImage('images/science.png'),
-                                      fit: BoxFit.contain,
-                                    ),
-                                  ),
-                                ),
-                                onTap:(){
-                                  navigateTo(context, const ScienceNews());
-                                },
-                              ),
-                            ),
-                          ],
+                            itemCount:cubit.imagesScreen.length
                         ),
                       ),
                     ),
