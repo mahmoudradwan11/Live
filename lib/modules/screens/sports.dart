@@ -19,7 +19,8 @@ class SportsNews extends StatelessWidget {
              floatHeaderSlivers: true,
              headerSliverBuilder:(context,isScrolled)=>[
                const SliverAppBar(
-                 expandedHeight: 190,
+                 leading: Icon(Icons.arrow_back,color: Colors.transparent,),
+                 expandedHeight: 193,
                  flexibleSpace: FlexibleSpaceBar(
                    background: Image(image: AssetImage('images/sports.png'),),
                  ),

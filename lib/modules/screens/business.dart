@@ -19,6 +19,7 @@ class BusinessNews extends StatelessWidget {
               floatHeaderSlivers: true,
               headerSliverBuilder:(context,isScrolled)=>[
                 const SliverAppBar(
+                  leading: Icon(Icons.arrow_back,color: Colors.transparent,),
                   expandedHeight: 250,
                   flexibleSpace: FlexibleSpaceBar(
                     background: Image(image: AssetImage('images/business.png'),),
