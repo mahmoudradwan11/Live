@@ -15,14 +15,22 @@ class BusinessNews extends StatelessWidget {
         builder: (context, state) {
           var cubit= NewsCubit.get(context);
           return Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-                title: const Text('Business News')),
-            body: ListView.separated(
-              itemBuilder:(context,index)=>buildCustomNews(cubit.businessModel!.articles[index]),
-              separatorBuilder:(context,index)=>const BuildDivider(),
-              itemCount:cubit.businessModel!.articles.length,
-            ),
+            body: NestedScrollView(
+              floatHeaderSlivers: true,
+              headerSliverBuilder:(context,isScrolled)=>[
+                const SliverAppBar(
+                  expandedHeight: 250,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Image(image: AssetImage('images/business.png'),),
+                  ),
+                ),
+              ],
+              body: ListView.separated(
+                itemBuilder:(context,index)=>buildCustomNews(cubit.businessModel!.articles[index]),
+                separatorBuilder:(context,index)=>const BuildDivider(),
+                itemCount:cubit.businessModel!.articles.length,
+              ),
+            )
           );
         }
         );

@@ -15,14 +15,22 @@ class SportsNews extends StatelessWidget {
         builder: (context, state) {
           var cubit = NewsCubit.get(context);
           return Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-                title: const Text('Sports News')),
-            body: ListView.separated(
-              itemBuilder:(context,index)=>buildCustomNews(cubit.sportsModel!.articles[index]),
-              separatorBuilder:(context,index)=>const BuildDivider(),
-              itemCount:cubit.sportsModel!.articles.length,
-            ),
+           body: NestedScrollView(
+             floatHeaderSlivers: true,
+             headerSliverBuilder:(context,isScrolled)=>[
+               const SliverAppBar(
+                 expandedHeight: 190,
+                 flexibleSpace: FlexibleSpaceBar(
+                   background: Image(image: AssetImage('images/sports.png'),),
+                 ),
+               ),
+             ],
+             body: ListView.separated(
+               itemBuilder:(context,index)=>buildCustomNews(cubit.businessModel!.articles[index]),
+               separatorBuilder:(context,index)=>const BuildDivider(),
+               itemCount:cubit.businessModel!.articles.length,
+             ),
+           ),
           );
         }
         );

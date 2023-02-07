@@ -16,14 +16,21 @@ class  ScienceNews extends StatelessWidget {
         builder: (context, state) {
           var cubit = NewsCubit.get(context);
           return Scaffold(
-            appBar: AppBar(
-              centerTitle: true,
-                title: const Text('Science News')
-            ),
-            body: ListView.separated(
-              itemBuilder:(context,index)=>buildCustomNews(cubit.scienceModel!.articles[index]),
-              separatorBuilder:(context,index)=>const BuildDivider(),
-              itemCount:cubit.scienceModel!.articles.length,
+            body: NestedScrollView(
+              floatHeaderSlivers: true,
+              headerSliverBuilder:(context,isScrolled)=>[
+                const SliverAppBar(
+                  expandedHeight: 190,
+                  flexibleSpace: FlexibleSpaceBar(
+                    background: Image(image: AssetImage('images/science.png'),),
+                  ),
+                ),
+              ],
+              body: ListView.separated(
+                itemBuilder:(context,index)=>buildCustomNews(cubit.businessModel!.articles[index]),
+                separatorBuilder:(context,index)=>const BuildDivider(),
+                itemCount:cubit.businessModel!.articles.length,
+              ),
             ),
           );
         });
