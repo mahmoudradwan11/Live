@@ -26,7 +26,7 @@ Widget buildCustomNews(generalModel){
            height: 10,
          ),
          Text(
-           generalModel.title!,style:const TextStyle(fontWeight: FontWeight.bold),),
+           generalModel.title!,style:const TextStyle(fontWeight: FontWeight.bold),maxLines: 3,overflow: TextOverflow.ellipsis,),
          const SizedBox(
            height: 10,
          ),
