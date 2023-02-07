@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live/core/controller/cubit.dart';
 import 'package:live/core/controller/states.dart';
+import 'package:live/core/theme/themes.dart';
 import 'package:live/modules/screens/search.dart';
 import 'package:live/modules/widgets/builder/costom_news.dart';
 import 'package:live/modules/widgets/builder/custom_images.dart';
 import 'package:live/modules/widgets/builder/divider.dart';
 import 'package:live/modules/widgets/functions/navigate.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class Home extends StatelessWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,6 +19,44 @@ class Home extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           var cubit = NewsCubit.get(context);
+          if(cubit.generalModel==null) {
+            return Scaffold(
+                appBar: AppBar(
+                    elevation: 0.0,
+                    title: Row(children: const [
+                      Text('News is'),
+                      SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        'Live',
+                        style: TextStyle(color: Colors.blue, fontSize: 26),
+                      )
+                    ]),
+                    actions: [
+                      IconButton(
+                        onPressed: () {
+                          cubit.changeMode();
+                        },
+                        icon: const Icon(
+                          Icons.dark_mode_outlined,
+                        ),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            print('search');
+                            navigateTo(context, const SearchScreen());
+                          },
+                          icon: const Icon(Icons.search)),
+                    ]),
+                body: Center(
+                  child: LoadingAnimationWidget.inkDrop(
+                    color: defaultColor,
+                    size: 30,
+                  ),
+                )
+            );
+          }
           return Scaffold(
             drawer: const Drawer(
               backgroundColor: Colors.black,
