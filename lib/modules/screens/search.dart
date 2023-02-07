@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live/core/controller/cubit.dart';
 import 'package:live/core/controller/states.dart';
+import 'package:live/core/theme/themes.dart';
 import 'package:live/modules/widgets/builder/costom_news.dart';
 import 'package:live/modules/widgets/builder/divider.dart';
 
@@ -25,17 +26,20 @@ class SearchScreen extends StatelessWidget {
                   children: [
                     Container(
                       decoration: BoxDecoration(
-                          color: Colors.grey[200],
+                          color: cubit.dark ? Colors.black.withOpacity(0.3) : Colors.grey[200],
                           borderRadius: BorderRadius.circular(20)),
                       height: 55,
                       child: Center(
                         child: TextField(
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: 'Search',
+                              hintStyle: TextStyle(color: cubit.dark? Colors.white : Colors.black),
+                              labelStyle:const TextStyle(color: Colors.blue),
+                              fillColor: Colors.blue,
                               prefixIcon: Icon(
                                 Icons.search_outlined,
-                                color: Colors.black,
+                                color: cubit.dark ? Colors.white : Colors.black,
                               )),
                           onChanged: (value) {
                             cubit.searchNews(value);
@@ -51,7 +55,7 @@ class SearchScreen extends StatelessWidget {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (context, index) => buildCustomNews(
-                              cubit.searchModel!.articles[index]),
+                              cubit.searchModel!.articles[index],context),
                           separatorBuilder: (context, index) =>
                               const BuildDivider(),
                           itemCount: cubit.searchModel!.articles.length)

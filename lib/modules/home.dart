@@ -22,10 +22,10 @@ class Home extends StatelessWidget {
               backgroundColor: Colors.black,
             ),
             appBar: AppBar(
-                backgroundColor: Colors.white,
+               // backgroundColor: Colors.white,
                 elevation: 0.0,
                 title: Row(children: const [
-                  Text('News is', style: TextStyle(color: Colors.black)),
+                  Text('News is'),
                   SizedBox(
                     width: 10,
                   ),
@@ -36,11 +36,19 @@ class Home extends StatelessWidget {
                 ]),
                 actions: [
                   IconButton(
+                    onPressed:(){
+                      cubit.changeMode();
+                    },
+                    icon:const Icon(
+                      Icons.dark_mode_outlined,
+                    ),
+                  ),
+                  IconButton(
                       onPressed: () {
                         print('search');
                         navigateTo(context, const SearchScreen());
                       },
-                      icon: const Icon(Icons.search))
+                      icon: const Icon(Icons.search)),
                 ]),
             body: SingleChildScrollView(
               child: Column(
@@ -67,7 +75,7 @@ class Home extends StatelessWidget {
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
                       itemBuilder: (context, index) =>
-                          buildCustomNews(cubit.generalModel!.articles[index]),
+                          buildCustomNews(cubit.generalModel!.articles[index],context),
                       separatorBuilder: (context, index) =>
                           const BuildDivider(),
                       itemCount: cubit.generalModel!.articles.length,

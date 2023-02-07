@@ -14,18 +14,21 @@ void main() async {
   DioHelper.init();
   await CacheHelper.init();
   Bloc.observer = MyBlocObserver();
+  bool? mode = CacheHelper.getData(key: 'mode');
   country = CacheHelper.getData(key: 'Country');
   print('Country  = $country');
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.dark,
   ));
-  runApp(const MyApp());
+  runApp(MyApp(
+    appMode: mode,
+  ));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+  final bool? appMode;
+  const MyApp({super.key,this.appMode});
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -33,14 +36,18 @@ class MyApp extends StatelessWidget {
         ..getSports()
         ..getBusiness()
         ..getGeneral()
-        ..getScience(),
+        ..getScience()
+        ..changeMode(fromShared: appMode),
       child: BlocConsumer<NewsCubit, NewsStates>(
           listener: (context, state) {},
           builder: (context, state) {
+            var cubit = NewsCubit.get(context);
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'Live',
               theme: lightTheme,
+              themeMode: cubit.dark ? ThemeMode.dark : ThemeMode.light,
+              darkTheme: darkTheme,
               home: const SplashScreen(),
             );
           }),

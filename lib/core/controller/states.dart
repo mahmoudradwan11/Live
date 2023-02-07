@@ -12,6 +12,8 @@ class GetSportsData extends NewsStates {}
 
 class ErrorSportsData extends NewsStates {}
 
+class ChangeAppMode extends NewsStates{}
+
 class GetScienceData extends NewsStates {}
 
 class ErrorScienceData extends NewsStates {}

@@ -2,6 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:live/core/constants/constants.dart';
 import 'package:live/core/controller/states.dart';
 import 'package:live/core/network/dio_helper.dart';
+import 'package:live/core/network/local.dart';
 import 'package:live/models/business_model.dart';
 import 'package:live/models/general_model.dart';
 import 'package:live/models/science_model.dart';
@@ -26,7 +27,20 @@ class NewsCubit extends Cubit<NewsStates> {
     selectedCountry = country;
     emit(ChangeCountry());
   }
-
+  bool dark = false;
+  void changeMode({bool? fromShared}) {
+    if (fromShared != null) {
+      dark = fromShared;
+      emit(ChangeAppMode());
+    }
+    else
+    {
+      dark = !dark;
+      CacheHelper.putBoolData(key: 'mode', value:dark).then((value) {
+        emit(ChangeAppMode());
+      });
+    }
+  }
   List<AppImages> imagesScreen = [
     AppImages('images/general.jpg', const Home()),
     AppImages('images/business.png', const BusinessNews()),

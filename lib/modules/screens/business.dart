@@ -33,7 +33,7 @@ class BusinessNews extends StatelessWidget {
             ],
             body: ListView.separated(
               itemBuilder: (context, index) =>
-                  buildCustomNews(cubit.businessModel!.articles[index]),
+                  buildCustomNews(cubit.businessModel!.articles[index],context),
               separatorBuilder: (context, index) => const BuildDivider(),
               itemCount: cubit.businessModel!.articles.length,
             ),
