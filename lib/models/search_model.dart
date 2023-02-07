@@ -2,7 +2,10 @@ class SearchModel {
   String? status;
   int? totalResults;
   List<ArticlesSearchModel> articles = [];
-  SearchModel({required this.status, required this.totalResults, required this.articles});
+  SearchModel(
+      {required this.status,
+      required this.totalResults,
+      required this.articles});
 
   SearchModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
@@ -15,28 +18,29 @@ class SearchModel {
     }
   }
 }
-class ArticlesSearchModel{
+
+class ArticlesSearchModel {
   Source? source;
   String? author;
   String? title;
   String? description;
   String? url;
-  String? urlToImage ;
+  String? urlToImage;
   String? publishedAt;
   String? content;
 
   ArticlesSearchModel(
       {required this.source,
-        required this.author,
-        required this.title,
-        required this.description,
-        required this.url,
-        required this.urlToImage,
-        required this.publishedAt,
-        required this.content});
+      required this.author,
+      required this.title,
+      required this.description,
+      required this.url,
+      required this.urlToImage,
+      required this.publishedAt,
+      required this.content});
 
   ArticlesSearchModel.fromJson(Map<String, dynamic> json) {
-    source = json['source'] != null ?Source.fromJson(json['source']) : null;
+    source = json['source'] != null ? Source.fromJson(json['source']) : null;
     author = json['author'];
     title = json['title'];
     description = json['description'];
@@ -46,6 +50,7 @@ class ArticlesSearchModel{
     content = json['content'];
   }
 }
+
 class Source {
   String? id;
   String? name;

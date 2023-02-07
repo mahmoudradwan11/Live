@@ -2,7 +2,10 @@ class ScienceModel {
   String? status;
   int? totalResults;
   List<ArticlesScienceModel> articles = [];
-  ScienceModel({required this.status, required this.totalResults, required this.articles});
+  ScienceModel(
+      {required this.status,
+      required this.totalResults,
+      required this.articles});
 
   ScienceModel.fromJson(Map<String, dynamic> json) {
     status = json['status'];
@@ -15,28 +18,29 @@ class ScienceModel {
     }
   }
 }
-class ArticlesScienceModel{
+
+class ArticlesScienceModel {
   Source? source;
   String? author;
   String? title;
   String? description;
   String? url;
-  String? urlToImage ;
+  String? urlToImage;
   String? publishedAt;
   String? content;
 
   ArticlesScienceModel(
       {required this.source,
-        required this.author,
-        required this.title,
-        required this.description,
-        required this.url,
-        required this.urlToImage,
-        required this.publishedAt,
-        required this.content});
+      required this.author,
+      required this.title,
+      required this.description,
+      required this.url,
+      required this.urlToImage,
+      required this.publishedAt,
+      required this.content});
 
   ArticlesScienceModel.fromJson(Map<String, dynamic> json) {
-    source = json['source'] != null ?Source.fromJson(json['source']) : null;
+    source = json['source'] != null ? Source.fromJson(json['source']) : null;
     author = json['author'];
     title = json['title'];
     description = json['description'];
@@ -46,6 +50,7 @@ class ArticlesScienceModel{
     content = json['content'];
   }
 }
+
 class Source {
   String? id;
   String? name;

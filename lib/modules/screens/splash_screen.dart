@@ -13,17 +13,20 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   Timer? _timer;
-  _startDelay(){
-    _timer = Timer(const Duration(seconds:4),_goNext);
+  _startDelay() {
+    _timer = Timer(const Duration(seconds: 4), _goNext);
   }
-  void _goNext(){
-    navigateAndReplace(context,const Home());
+
+  void _goNext() {
+    navigateAndReplace(context, const Home());
   }
+
   @override
-  void initState(){
+  void initState() {
     super.initState();
     _startDelay();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,30 +35,33 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children:[
+          children: [
             Container(
-              height: 100,
+                height: 100,
                 width: 100,
-                child: const Image(image:AssetImage('images/logo.png'))),
-            DefaultTextStyle(style:const TextStyle(
-                color: Colors.orangeAccent,
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-            ),
-              child:AnimatedTextKit(
-              animatedTexts:[
-                WavyAnimatedText('Live News',),
-              ],
-              isRepeatingAnimation: true,
-            ),
+                child: const Image(image: AssetImage('images/logo.png'))),
+            DefaultTextStyle(
+              style: const TextStyle(
+                  color: Colors.orangeAccent,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold),
+              child: AnimatedTextKit(
+                animatedTexts: [
+                  WavyAnimatedText(
+                    'Live News',
+                  ),
+                ],
+                isRepeatingAnimation: true,
+              ),
             )
           ],
         ),
       ),
     );
   }
+
   @override
-  dispose(){
+  dispose() {
     _timer!.cancel();
     super.dispose();
   }

@@ -8,7 +8,8 @@ import 'package:live/core/network/dio_helper.dart';
 import 'package:live/core/network/local.dart';
 import 'package:live/modules/screens/splash_screen.dart';
 import 'core/bloc_observe.dart';
-void main()async{
+import 'core/theme/themes.dart';
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   DioHelper.init();
   await CacheHelper.init();
@@ -21,14 +22,18 @@ void main()async{
   ));
   runApp(const MyApp());
 }
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-      NewsCubit()..getSports()..getBusiness()..getGeneral()..getScience()..searchNews(),
+      create: (context) => NewsCubit()
+        ..getSports()
+        ..getBusiness()
+        ..getGeneral()
+        ..getScience(),
       child: BlocConsumer<NewsCubit, NewsStates>(
           listener: (context, state) {},
           builder: (context, state) {
@@ -38,8 +43,7 @@ class MyApp extends StatelessWidget {
               theme: lightTheme,
               home: const SplashScreen(),
             );
-          }
-      ),
+          }),
     );
   }
 }

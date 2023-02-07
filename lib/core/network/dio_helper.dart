@@ -1,18 +1,17 @@
 import 'package:dio/dio.dart';
 import 'package:live/core/constants/constants.dart';
-class DioHelper
-{
+
+class DioHelper {
   static Dio? dio;
-  static init()
-  {
+  static init() {
     dio = Dio(BaseOptions(
-      baseUrl:AppConstant.baseUrl,
+      baseUrl: AppConstant.baseUrl,
       receiveDataWhenStatusError: true,
-    )
-    );
+    ));
   }
-  static Future<Response> getData({required String url, required Map <String,dynamic> query})async
-  {
+
+  static Future<Response> getData(
+      {required String url, required Map<String, dynamic> query}) async {
     return await dio!.get(
       url,
       queryParameters: query,

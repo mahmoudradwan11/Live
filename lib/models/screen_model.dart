@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-class AppImages{
+
+class AppImages {
   String? image;
   Widget? route;
-  AppImages(this.image,this.route);
+  AppImages(this.image, this.route);
 }
